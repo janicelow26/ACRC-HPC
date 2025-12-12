@@ -1,0 +1,108 @@
+
+Miniforge3 is available in /apps/miniforge/23.3.1-1
+ to create and manage your own python environment. Setup conda using:
+
+  $ source /apps/miniforge/23.3.1-1/etc/profile.d/conda.sh
+
+ or
+
+  $ eval "$(/apps/miniforge/23.3.1-1/bin/conda shell.bash hook)"
+
+ or load the miniforge module
+
+  $ module load miniforge/23.3.1-1
+
+ You will need to create your own environments thereafter.
+ e.g. $ conda create --name myPythonInstall
+      $ conda activate myPythonInstall
+
+ You can add the bioconda channel with
+  $ conda config --add channels bioconda
+
+ Default disk quota for scratch: 1.5TB/user
+ Max no of files: 150,000/user
+
+ Default disk quota for /home/users: 200GB/user
+ Max no of files: 150,000/user
+
+ To check your current consumption and assigned quota on the pluto login node:
+ =============================================================================
+ 
+ For home:
+  $ mmlsquota -u $USER --block-size auto fs-hpc:fss-hpc-home
+
+ For scratch:
+  $ mmlsquota -u $USER --block-size auto fs-hpc:fss-hpc-scratch
+
+ * your blocks consumption is listed under "blocks" column
+ * your files (or inodes) consumption is listed under "files" column
+ * your quota is listed under the respective "limit" column
+
+
+For example,
+
+ for home:
+ [$USER@hpc-login01 ~]$ mmlsquota -u $USER --block-size auto fs-hpc:fss-hpc-home
+                         Block Limits                                               |     File Limits
+ Filesystem Fileset    type         blocks      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace  Remarks
+ fs-hpc     fss-hpc-home USR            747M       200G       200G          0     none |      754  150000   150000        0     none esscluster.acrc.a-star.edu.sg
+
+ * the user above consumed 747M out of 200G for block and 754 out of 150000
+   for files
+
+ for scratch:
+ [$USER@hpc-login01 ~]$ mmlsquota -u $USER --block-size auto fs-hpc:fss-hpc-scratch
+                         Block Limits                                               |     File Limits
+ Filesystem Fileset    type         blocks      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace  Remarks
+ fs-hpc     fss-hpc-scratch USR            256K     1.465T     1.465T          0     none |        8  150000   150000        0     none esscluster.acrc.a-star.edu.sg
+
+ * the user above consumed 256K out of 1.465T for block and 8 out of 150000
+   for files
+
+ You can run the script /apps/how-to/check-storage-use-and-quota.sh
+ to do a quick check on usage.
+
+ Queue info
+ ===========
+
+Refer to /apps/how-to/queue.info for job scheduler queue info​
+ and /apps/how-to/interacting-with-slurm.txt for basic job scheduler commands.
+ 
+ SLURM job script examples can also be found in /apps/how-to/sample-scripts
+
+ For PBS users, see /apps/how-to/pbs-slurm-translation
+
+ General information for new HPC user
+ ====================================
+ * Please do not run any jobs on the login node(head node). 
+   Any unauthorized process on the login node will be terminated immediately.
+ * Please submit your jobs through the job schedulers on each HPC system. 
+   Sample job submission scripts are located in /apps/how-to/ on each system.
+ * Please use $HOME/scratch to run all jobs and after each job is completed, 
+   please copy your important result data to $HOME/DATA or transfer to your
+   own storage, e.g. your workstation.
+ * Users are strongly advised not to store important data in $SCRATCH, as it
+   has no backup.
+ * For longer term storage, please store your files in $HOME/DATA.
+   This is a common SOD filesystem mounted on all HPC login nodes. This $DATA
+   has no backup for itself.
+   (NOTE: this space is visible only from the login nodes and not from the
+    compute nodes. So users are NOT TO run jobs from DATA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
