@@ -1,0 +1,92 @@
+(base) lowpm@IDL-SPL-5HPLQV0 ~ % ssh lowpm@pluto.acrc.a-star.edu.sg
+The authenticity of host 'pluto.acrc.a-star.edu.sg (202.83.248.50)' can't be established.
+ED25519 key fingerprint is SHA256:a3FpGhiBbrkCf8YKP/Q8y5J+rtDD9mGoswi2QlU0efg.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'pluto.acrc.a-star.edu.sg' (ED25519) to the list of known hosts.
+lowpm@pluto.acrc.a-star.edu.sg's password: 
+
+ *----------------------------------------------------------------------------*
+
+  Welcome to A*CRC HPC System named “pluto”
+ 
+  For new users, please refer to /apps/how-to/QUICKSTART
+  For information on using pluto in general, please refer to /apps/how-to/*
+  For any queries after reading the above documentation, please email us at
+  servicedesk@acrc.a-star.edu.sg
+ 
+  Latest news:
+  -----------------
+  2nd Jun 2022
+
+  We have a new dedicated interactive queue.
+  Before using this queue, please refer to the updated file at 
+  /apps/slurm-sample-scripts/interactive-jobs.info
+  
+  10th Oct 2023
+
+  All staff are instructed to halt all new installation and usage of Anaconda’s software products, including Miniconda, 
+  Python with Anaconda and PyCharm with Anaconda Plugin.
+  Please refer to broadcast email sent on the 10 Oct 2023 on the subject matter (Use of Anaconda Software).
+
+
+  A very important reminder to all users
+  **************************************
+  Please do not run jobs directly on the login node.
+  Doing so will make the system unresponsive to everyone.
+  This login node is mainly for login and job submission.
+  Please use the express queues for quick testing of jobs.
+
+[lowpm@hpc-login01 ~]$ ls
+DATA  scratch
+[lowpm@hpc-login01 ~]$ sinfo
+PARTITION    AVAIL  TIMELIMIT  NODES  STATE NODELIST 
+interactive     up    8:00:00      1    mix hpc-com112 
+express         up    1:00:00      1   resv hpc-com007 
+express         up    1:00:00     41    mix hpc-com[001,003-006,008,010,012-015,018-021,023,027-028,037,039,044,048-049,059,069,079-080,083-085,087,095,097-103,105-106] 
+express         up    1:00:00     53  alloc hpc-com[002,009,011,017,022,024-026,029-030,033,035-036,038,040-043,045-047,052-058,060-065,067,071-078,082,089-092,094,096,104,108-109] 
+express         up    1:00:00     16   idle hpc-com[016,031-032,034,050-051,066,068,070,081,086,088,093,107,110-111] 
+normal*         up 3-00:00:00      1   resv hpc-com007 
+normal*         up 3-00:00:00     41    mix hpc-com[001,003-006,008,010,012-015,018-021,023,027-028,037,039,044,048-049,059,069,079-080,083-085,087,095,097-103,105-106] 
+normal*         up 3-00:00:00     53  alloc hpc-com[002,009,011,017,022,024-026,029-030,033,035-036,038,040-043,045-047,052-058,060-065,067,071-078,082,089-092,094,096,104,108-109] 
+normal*         up 3-00:00:00     16   idle hpc-com[016,031-032,034,050-051,066,068,070,081,086,088,093,107,110-111] 
+long            up 14-00:00:0      1   resv hpc-com007 
+long            up 14-00:00:0     41    mix hpc-com[001,003-006,008,010,012-015,018-021,023,027-028,037,039,044,048-049,059,069,079-080,083-085,087,095,097-103,105-106] 
+long            up 14-00:00:0     53  alloc hpc-com[002,009,011,017,022,024-026,029-030,033,035-036,038,040-043,045-047,052-058,060-065,067,071-078,082,089-092,094,096,104,108-109] 
+long            up 14-00:00:0     16   idle hpc-com[016,031-032,034,050-051,066,068,070,081,086,088,093,107,110-111] 
+largemem        up 3-00:00:00      1    mix hpc-lmem01 
+largemem        up 3-00:00:00      1  alloc hpc-lmem02 
+largememlong    up 14-00:00:0      1    mix hpc-lmem01 
+largememlong    up 14-00:00:0      1  alloc hpc-lmem02 
+gpuexpress      up    1:00:00      2    mix hpc-accel[01,05] 
+gpuexpress      up    1:00:00      3   idle hpc-accel[02-04] 
+gpu             up 3-00:00:00      2    mix hpc-accel[01,05] 
+gpu             up 3-00:00:00      3   idle hpc-accel[02-04] 
+gpulong         up 14-00:00:0      2    mix hpc-accel[01,05] 
+gpulong         up 14-00:00:0      3   idle hpc-accel[02-04] 
+[lowpm@hpc-login01 ~]$ cd scratch/
+[lowpm@hpc-login01 scratch]$ ls
+[lowpm@hpc-login01 scratch]$ cd ..
+[lowpm@hpc-login01 ~]$ ls
+DATA  scratch
+[lowpm@hpc-login01 ~]$ cd DATA/
+[lowpm@hpc-login01 DATA]$ ls
+[lowpm@hpc-login01 DATA]$ cd ..
+[lowpm@hpc-login01 ~]$ cd /apps/how-to/
+[lowpm@hpc-login01 how-to]$ ls
+check-storage-use-and-quota.sh   pbs-slurm-translation  slurm.README
+interacting-with-slurm.txt       queue.info             software-list.info
+interactive-jobs.info            QUICKSTART
+managing-conda-environments.txt  sample-scripts
+[lowpm@hpc-login01 how-to]$ 
+
+
+
+
+
+
+
+
+
+
