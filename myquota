@@ -1,0 +1,16 @@
+
+
+
+[lowpm@hpc-login01 how-to]$ mmlsquota -u lowpm --block-size auto fs-hpc:fss-hpc-home
+                         Block Limits                                               |     File Limits
+Filesystem Fileset    type         blocks      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace  Remarks
+fs-hpc     fss-hpc-home USR               0       200G       200G          0     none |       11  150000   150000        0     none esscluster.acrc.a-star.edu.sg
+[lowpm@hpc-login01 how-to]$ mmlsquota -u lowpm --block-size auto fs-hpc:fss-hpc-scratch
+                         Block Limits                                               |     File Limits
+Filesystem Fileset    type         blocks      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace  Remarks
+fs-hpc     fss-hpc-scratch USR            
+
+
+
+
+
