@@ -95,7 +95,141 @@ Refer to /apps/how-to/queue.info for job scheduler queue info​
 
 
 
+############################################# how to run interactive queue #######################################################
 
+Update: 02 August 2022
+
+There are now two ways to perform your interactive work in pluto.
+
+1. Use the dedicated interactive queue(new)
+This queue is to let you run your workflow and admin stuff.
+Typical the stuff you run on your laptop.
+
+2, Request for interactive platform on any of the queues as usual
+(except the dedicated interactive queue in point 1 above).
+To perform the stuff in point one above in addition
+ to be able to test run your programs.
+
+##############################################################################
+1. Use the dedicated interactive queue(new)
+##############################################################################
+
+There is now a queue dedicated to interactive work.
+This is to allow users to perform workflow/administrative 
+ work on pluto quickly without using the login node. 
+This queue is setup for a maximum of 12 concurrent users. 
+One “base” node is dedicated for this queue. 
+ 
+*****************************************************
+Partition name: interactive
+Nodes: hpc-com112 is dedicated solely to this purpose; 
+        thus it is no longer part of any other partitions.
+ 
+Please note the following limits:
+Each user can only have one job in this queue at any one time.
+Each job can request for up to 4 CPUs, 15G, 8 hours.
+ 
+Please use the following sample command.
+
+  srun -t 8:00:00 --ntasks-per-node 4 --mem=15G -p interactive --pty /bin/bash
+ 
+*Very important note: Please DO NOT specify “--exclusive=user” here. 
+This option will reserve the entire node to this job. 
+However you will still get the restricted resources(4 Cores, 15GB RAM) but 
+ just deprive other users from using this node.
+****************************************************** 
+
+##############################################################################
+2. Request for interactive platform on any of the queues
+##############################################################################
+
+Below is a sample srun command that you can run from the login node.
+This will allocate a full node for your interactive session for 1 hour.
+
+  srun -t 1:00:00 -N 1 -p express --ntasks-per-node 1 --cpus-per-task 48 --mem=168G --exclusive=user --pty /bin/bash
+
+to test multithreaded (e.g. OpenMP) applications using 48 cores on the node or
+
+  srun -t 1:00:00 -N 1 -p express --ntasks-per-node 48 --cpus-per-task 1 --mem=168G --exclusive=user --pty /bin/bash
+
+to test MPI jobs within a node. 
+
+Use "-N 2" to test MPI job on 2 nodes (this example will use 96 cores in total).
+
+##############################################################################
+##                                                                          ##
+## -J = JobName                                                             ##
+## -N = number of nodes to select.                                          ##
+## --ntasks-per-node = Number of (MPI) tasks to run per node                ##
+##                             Max. of 48 cores per node                    ##
+## --cpus-per-task = How many (OpenMP) threads on each (MPI) task           ##
+##                   Leave this to 1 for pure MPI jobs.                     ##
+##                                                                          ##
+##                   ntasks-per-node x cpus-per-task should not             ##
+##                   exceed 48 cores.                                       ##
+##                                                                          ##
+## -t = Job time required in HH:MM:SS                                       ##
+## --mem-per-cpu = Memory reserved per cpu.                                 ##
+##                                                                          ##
+##                 Each node has 168,000MB, giving 3,500MB per core.        ##
+##                 ntasks-per-node x cpus-per-task x mem-per-cpu            ##
+##                 should not exceed 168,000MB.                             ##
+##                 Alternatively, total memory per node can be              ##
+##                 specified with --mem <MB>                                ##
+##                                                                          ##
+## -p express -- Select 'express' for higher queue priority in getting an   ##
+##               interactive session, upto 1 hour job runtime permitted and ##
+##               upto 2 nodes allowed.                                      ##
+##                                                                          ##
+## --exclusive=user -- add this to reserve the entire allocated node to you ##
+##                     if requesting for less than 48 cores per node.       ##
+##                                                                          ##
+##############################################################################
+
+
+To test on a GPU node with 1 GPU, use:
+
+  srun -t 1:00:00 -N 1 -p gpuexpress --cpus-per-gpu 6 --mem-per-gpu 21000 --gres=gpu:tesla:1 --pty /bin/bash
+
+You will need to take care not to use more than the number of CPU cores and
+memory requested, as they may interfere with the other GPU running jobs.
+
+To test on a GPU nodes with all 8 GPUs, use:
+
+  srun -t 1:00:00 -N 1 -p gpuexpress --cpus-per-gpu 6 --mem-per-gpu 21000 --gres=gpu:tesla:8 --pty /bin/bash
+
+
+###############################################################################
+##                                                                           ##
+## #SBATCH -J = JobName                                                      ##
+## #SBATCH -p = gpuexpress -- selects the GPU express queue                  ##
+## #SBATCH -t = Job time required in HH:MM:SS (upto 1h allowed in gpuexpress) #
+## #SBATCH -N = 1 -- GPU jobs are currently restricted to single nodes       ##
+## #SBATCH --gres=gpu:tesla:1 -- The number is the requested number of GPUs  ##
+##                               There are a maximum of 8 V100 GPUs per node ##
+## #SBATCH --cpus-per-gpu = How many cores to reserve per allocated GPU      ##
+##                                                                           ##
+##                          cpus-per-gpu x gpu:tesla:X should not            ##
+##                          exceed 48 cores.                                 ##
+##                          There are 48 cores available per node, hence the ##
+##                          ideal default is 6 cores per GPU.                ##
+##                                                                           ##
+## #SBATCH --mem-per-gpu = System memory reserved per allocate GPU.          ##
+##                                                                           ##
+##                         Each node has 192,000MB, giving 24,000MB per GPU. ##
+##                         To allow memory for the OS itself, assume each    ##
+##                         node has 168,000MB, giving 21,000MB per GPU.      ##
+##                         mem-per-gpu x gpu:tesla:X should not exceed       ##
+##                         168,000MB. Alternatively, total memory per node   ##
+##                         can be specified with #SBATCH --mem <MB>          ##
+##                                                                           ##
+## -p gpuexpress -- Select 'gpu express' for higher queue priority in getting #
+##                  an interactive session, upto 1 hour job runtime permitted.#
+##                                                                           ##
+## --exclusive=user -- add this to reserve the entire allocated node to you  ##
+##                     if requesting for less than 8 gpus or 48 cpus per node.#
+##                                                                           ##
+###############################################################################
 
 
 
