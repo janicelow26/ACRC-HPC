@@ -84,7 +84,50 @@ managing-conda-environments.txt  sample-scripts
 
 
 
-
+(base) lowpm@IDL-SPL-5HPLQV0 ~ % scp /Users/lowpm/wes/QC/fastp/bad\ samples/* lowpm@pluto.acrc.a-star.edu.sg:/home/users/astar/aidl/lowpm/scratch/data/bad
+lowpm@pluto.acrc.a-star.edu.sg's password: 
+CHB7452_L7_1.trim.fq.gz      100% 1044MB   7.2MB/s   02:24    
+CHB7452_L7_2.trim.fq.gz      100% 1037MB   7.2MB/s   02:23    
+CHB7452_L7.fastp.html        100%  483KB   6.3MB/s   00:00    
+CHB7452_L7.fastp.json        100%  136KB   5.5MB/s   00:00    
+CHB7452_L8_1.trim.fq.gz      100% 1005MB   7.3MB/s   02:17    
+CHB7452_L8_2.trim.fq.gz      100% 1000MB   7.2MB/s   02:19    
+CHB7452_L8.fastp.html        100%  484KB   6.8MB/s   00:00    
+CHB7452_L8.fastp.json        100%  136KB   5.7MB/s   00:00    
+CHB7453_L7_1.trim.fq.gz      100%  935MB   6.9MB/s   02:16    
+CHB7453_L7_2.trim.fq.gz      100%  926MB   7.1MB/s   02:09    
+CHB7453_L7.fastp.html        100%  484KB   6.8MB/s   00:00    
+CHB7453_L7.fastp.json        100%  136KB   5.8MB/s   00:00    
+CHB7476_L7_1.trim.fq.gz      100% 1500MB   7.3MB/s   03:25    
+CHB7476_L7_2.trim.fq.gz      100% 1495MB   7.3MB/s   03:26    
+CHB7476_L7.fastp.html        100%  484KB   7.1MB/s   00:00    
+CHB7476_L7.fastp.json        100%  137KB   2.4MB/s   00:00    
+CHB7491_L7_1.trim.fq.gz      100% 1090MB   7.3MB/s   02:28    
+CHB7491_L7_2.trim.fq.gz      100% 1080MB   7.3MB/s   02:27    
+CHB7491_L7.fastp.html        100%  484KB   6.3MB/s   00:00    
+CHB7491_L7.fastp.json        100%  136KB   5.4MB/s   00:00    
+CHB7491_L8_1.trim.fq.gz      100% 1038MB   7.3MB/s   02:21    
+CHB7491_L8_2.trim.fq.gz      100% 1031MB   7.4MB/s   02:19    
+CHB7491_L8.fastp.html        100%  484KB   7.1MB/s   00:00    
+CHB7491_L8.fastp.json        100%  136KB   6.2MB/s   00:00    
+CHB7515_L7_1.trim.fq.gz      100% 1146MB   7.4MB/s   02:34    
+CHB7515_L7_2.trim.fq.gz      100% 1133MB   7.3MB/s   02:35    
+CHB7515_L7.fastp.html        100%  484KB   7.1MB/s   00:00    
+CHB7515_L7.fastp.json        100%  136KB   6.2MB/s   00:00    
+CHB7515_L8_1.trim.fq.gz      100% 1092MB   7.0MB/s   02:36    
+CHB7515_L8_2.trim.fq.gz      100% 1083MB   6.2MB/s   02:53    
+CHB7515_L8.fastp.html        100%  485KB   7.2MB/s   00:00    
+CHB7515_L8.fastp.json        100%  137KB   5.4MB/s   00:00    
+CHB7532_L7_1.trim.fq.gz      100% 1847MB   7.1MB/s   04:19    
+CHB7532_L7_2.trim.fq.gz      100% 1835MB   7.2MB/s   04:15    
+CHB7532_L7.fastp.html        100%  485KB   6.2MB/s   00:00    
+CHB7532_L7.fastp.json        100%  138KB   6.0MB/s   00:00    
+CHB7532_L8_1.trim.fq.gz      100% 1776MB   7.3MB/s   04:03    
+CHB7532_L8_2.trim.fq.gz      100% 1769MB   7.4MB/s   03:59    
+CHB7532_L8.fastp.html        100%  485KB   7.3MB/s   00:00    
+CHB7532_L8.fastp.json        100%  138KB   5.8MB/s   00:00    
+CHB7538_L7_1.trim.fq.gz      100%  776MB   7.4MB/s   01:44    
+CHB7538_L7_2.trim.fq.gz       28%  221MB   7.6MB/s   01:12
 
 
 
