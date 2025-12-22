@@ -132,4 +132,62 @@ CHB7538_L7_2.trim.fq.gz       28%  221MB   7.6MB/s   01:12
 
 
 
+ $ source /apps/miniforge/23.3.1-1/etc/profile.d/conda.sh
+     or
+  $ eval "$(/apps/miniforge/23.3.1-1/bin/conda shell.bash hook)"
+     or load the miniforge module
+  $ module load miniforge/23.3.1-1
+
+ You will need to create your own environments thereafter.
+  e.g. $ conda create --name myPythonInstall
+       $ conda activate myPythonInstall
+
+You can add the bioconda channel with
+  $ conda config --add channels bioconda
+
+/apps/how-to/sample-scripts/sample-miniforge3.sbatch
+
+
+
+
+
+interactive job command:
+> srun -t 1:00:00 -N 1 -p express --ntasks-per-node 1 --cpus-per-task 48 --mem=168G --exclusive=user --pty /bin/bash
+
+
+
+
+
+#!/bin/bash
+
+#SBATCH -J Miniforge_Job
+#SBATCH -t 00:05:00
+#SBATCH -N 1
+#SBATCH --ntasks-per-node 1
+#SBATCH --cpus-per-task 48
+#SBATCH --mem-per-cpu 3500
+#SBATCH --output=%x-%j.out
+#SBATCH --error=%x-%j.err
+#SBATCH --reservation rexpress
+
+# Setup Miniforge3
+module load miniforge/23.3.1-1
+
+# Setup a test environment 'myPythonEnv' with Python 3.10
+[ ! -d "$HOME/.conda/envs/myPythonEnv" ] && conda create -y -n myPythonEnv python=3.10
+
+# Activate environment
+conda activate myPythonEnv
+conda info
+
+# Run python
+echo "Python executable is" $(which python)
+python --version
+
+
+
+
+
+
+
 
