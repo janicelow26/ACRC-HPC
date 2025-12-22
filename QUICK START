@@ -237,6 +237,137 @@ To test on a GPU nodes with all 8 GPUs, use:
 
 
 
+[lowpm@hpc-login01 how-to]$ cat managing-conda-environments.txt 
+**
+
+ NOTICE: As of 09 Oct 2023, A*STAR has instructed all A*STAR staff to halt all new installation
+         and usage of Anaconda's software products, including Miniconda, Python with Anaconda and
+         PyCharm with Anaconda Plugin.
+
+         The instructions below are valid for miniforge / mambaforge.
+
+**
+
+
+ Setting up conda environments:
+ ------------------------------
+
+ Miniforge3 is available in /apps/miniforge/23.3.1-1
+ to create and manage your own python environment. Setup conda using:
+
+  $ source /apps/miniforge/23.3.1-1/etc/profile.d/conda.sh
+     or
+  $ eval "$(/apps/miniforge/23.3.1-1/bin/conda shell.bash hook)"
+     or load the miniforge module
+  $ module load miniforge/23.3.1-1
+
+  You will need to create your own environments thereafter.
+  e.g. $ conda create --name myPythonInstall
+       $ conda activate myPythonInstall
+
+  You can add the bioconda channel with
+  $ conda config --add channels bioconda
+
+  DO NOT ADD OR USE CHANNELS FROM https://repo.anaconda.com
+  After activating an environment with 'conda activate', check that
+  'conda info' does NOT list channel URLs containing
+  https://repo.anaconda.com
+
+ A SLURM sample script for job submission can be found at
+ /apps/how-to/sample-scripts/sample-miniforge3.sbatch
+
+ To setup mambaforge (Pluto only), execute the following 2 commands:
+  $ source /apps/mambaforge/23.1.0-4/etc/profile.d/conda.sh
+  $ source /apps/mambaforge/23.1.0-4/etc/profile.d/mamba.sh
+     or use the module mambaforge/23.1.0-4
+  $ module load mambaforge/23.1.0-4
+
+
+ Managing your limited disk space:
+ ---------------------------------
+
+ To help in managing your limited disk quota, users should do housekeeping
+ of their conda installations. 
+
+ We stongly suggest that users clean up cached files when conda environments
+ have been setup. To remove all index caches, lock files, unused cache
+ packages and tarballs:
+
+  $ conda clean --all
+
+ You can do a dry run to see what will be removed with:
+
+  $ conda clean --all --dry-run
+
+ If disk quota is still an issue, please remove any conda environments that
+ will not be used in the future or are redundant. To list the installed
+ environments:
+
+  $ conda list
+
+ To delete an environment named 'env_name':
+
+  $ conda remove -n env_name --all
+
+ If disk quota is still an issue, please perform housekeeping of other data
+ in home and scratch directories, remove redundant files and decide what
+ other data can be moved off the system, either to your own machine or to
+ the DATA directory in your home folder.
+
+
+
+[lowpm@hpc-login01 sample-scripts]$ cat sample-miniforge3.sbatch 
+#!/bin/bash
+
+#SBATCH -J Miniforge_Job
+#SBATCH -t 00:05:00
+#SBATCH -N 1
+#SBATCH --ntasks-per-node 1
+#SBATCH --cpus-per-task 48
+#SBATCH --mem-per-cpu 3500
+#SBATCH --output=%x-%j.out
+#SBATCH --error=%x-%j.err
+#SBATCH --reservation rexpress
+
+# Setup Miniforge3
+module load miniforge/23.3.1-1
+
+# Setup a test environment 'myPythonEnv' with Python 3.10
+[ ! -d "$HOME/.conda/envs/myPythonEnv" ] && conda create -y -n myPythonEnv python=3.10
+
+# Activate environment
+conda activate myPythonEnv
+conda info
+
+# Run python
+echo "Python executable is" $(which python)
+python --version
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
